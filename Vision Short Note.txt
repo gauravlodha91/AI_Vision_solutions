@@ -1,0 +1,41 @@
+
+
+For text_abstract from Image :
+
+
+	cv_client = ImageAnalysisClient(
+		 endpoint=ai_endpoint,
+		 credential=AzureKeyCredential(ai_key)
+	 )
+	 
+	 
+	 result = cv_client.analyze(
+				image_data=image_data,
+				visual_features=[VisualFeatures.READ]
+			)
+
+	print(result.read)		
+	
+	for line in result.read.blocks[0].lines:
+		for word in  line.words:
+			rt = word.bounding_polygon
+			bounding_polygon1 = ((rt[0].x,rt[0].y), (rt[1].x, rt[1].y), (rt[2].x, rt[2].y), (rt[3].x, rt[3].y))
+			print(f"    Word: '{word.text}', Bounding Polygon: {bounding_polygon}, Confidence: {word.confidence:.4f}")
+			drawLinePolygon = False
+			draw.polygon(bounding_polygon1, outline=color, width=5)
+			
+			
+
+		plt.imshow(image)
+		plt.tight_layout(pad=0)
+		outputfile = "Vision/Extract_text/imgae/test/" + file_name
+		fig.savefig(outputfile)
+		print('\n  Results saved in', outputfile) 
+		
+		
+		
+		
+=====================================================================================================================================
+
+
+		
