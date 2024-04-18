@@ -65,12 +65,12 @@ for filename in os.listdir('Vision\Extract_text\imgae'):
                 drawLinePloygon = True
                 r = line.bounding_polygon
                 bounding_polygon = ((r[0].x, r[0].y),(r[1].x, r[1].y),(r[2].x, r[2].y),(r[3].x, r[3].y))
-                print("Bounding_Polygon :", bounding_polygon)
+                # print("Bounding_Polygon :", bounding_polygon)
 
                 for word in  line.words:
                     rt = word.bounding_polygon
                     bounding_polygon1 = ((rt[0].x,rt[0].y), (rt[1].x, rt[1].y), (rt[2].x, rt[2].y), (rt[3].x, rt[3].y))
-                    print(f"    Word: '{word.text}', Bounding Polygon: {bounding_polygon}, Confidence: {word.confidence:.4f}")
+                    # print(f"    Word: '{word.text}', Bounding Polygon: {bounding_polygon}, Confidence: {word.confidence:.4f}")
                     drawLinePolygon = False
                     draw.polygon(bounding_polygon1, outline=color, width=5)
 
