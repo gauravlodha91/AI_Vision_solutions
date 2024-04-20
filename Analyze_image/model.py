@@ -55,7 +55,9 @@ result = cv_client.analyze(
         VisualFeatures.DENSE_CAPTIONS,
         VisualFeatures.TAGS,
         VisualFeatures.OBJECTS,
-        VisualFeatures.PEOPLE],
+        VisualFeatures.PEOPLE,
+        VisualFeatures.SMART_CROPS
+        ],
 )
 
 if result.caption is not None:
@@ -132,7 +134,21 @@ if result.people is not None:
 
 
 
+if result.smart_crops is not None:
+    print(" Smart Cropping:")
 
+    image = Image.open(image_url)
+    
+    for smart_crop in result.smart_crops.list:
+        r = smart_crop.bounding_box
+        bounding_box = (r.x, r.y, r.x + r.width, r.y + r.height)
+        # draw.rectangle(bounding_box, outline="Black", width=3)
+        print("smart crop :",bounding_box)
+        img2 = image.crop(bounding_box)
+        img2.save(f'Analyze_image/Images/test/smart_{image_name}')
+        # img2.show(
+
+       
 
 
 
